@@ -4188,6 +4188,86 @@ cs_pin:
 #   above parameters.
 ```
 
+### [sgp30]
+
+Air quality sensor support for reading the I2C SGP30 eCO2/TVOC
+measurements. The measurements are available via the
+[API Server](API_Server.md) and optionally the klipper text log
+and/or an external csv file
+
+```
+[sgp30 my_sgp30_sensor]
+#i2c_address:
+#   Default is 88 (0x58).
+#i2c_mcu:
+#i2c_bus:
+#i2c_speed:
+#   See the "common I2C settings" section for a description of the
+#   above parameters.
+temperature_sensor:
+#   The name of the temperature sensor used for temperature/
+#   humidity compensation. Example: "bme280 chamber"
+#   It is required to specifiy either "temperature_sensor" or
+#   "temperature_initial", but not both
+#temperature_key:
+#   If "temperature_sensor" is defined, its "get_status()" will be
+#   polled at the rate defined by "sample_time". Use the key
+#   defined by "temperature_key" to extract the the temperature
+#   from "get_status()". The default is "temperature"
+#temperature_tolerance:
+#   If "temperature_sensor" is defined, update the stored
+#   temperatured used for the temperature/humidity compenstation
+#   if the current value and the last stored value differ by
+#   "temperature_tolerance", in C. The default is 2 (deg C)
+#temperature_initial:
+#   A single, hard-coded temperature, in C, used for temperature/
+#   humidity compenstation. It is recommened to use 
+#   "temperature_sensor". It is required to specifiy either 
+#   "temperature_sensor" or "temperature_initial", but not both
+#humidity_sensor:
+#   The name of the humidity sensor used for temperature/
+#   humidity compensation. Example: "bme280 chamber"
+#   It is required to specifiy either "humidity_sensor" or
+#   "humidity_initial", but not both. Defaults to the same value
+#   defined by "temperature_sensor"
+#humidity_key:
+#   If "humidity_sensor" is defined, its "get_status()" will be
+#   polled at the rate defined by "sample_time". Use the key
+#   defined by "humidity_key" to extract the the humidity
+#   from "get_status()". The default is "humidity"
+#humidity_tolerance:
+#   If "humidity_sensor" is defined, update the stored
+#   humidity used for the temperature/humidity compenstation
+#   if the current value and the last stored value differ by
+#   "humidity_tolerance", in % RH. The default is 2 (% RH)
+#humidity_initial:
+#   A single, hard-coded humidity, in % RH, used for temperature/
+#   humidity compenstation. It is recommened to use 
+#   "humidity_sensor". It is required to specifiy either 
+#   "humidity_sensor" or "humidity_initial", but not both
+#sample_time:
+#   The time, in seconds, between samples. The default is 1.0
+#syslog_time:
+#   The time, in seconds, between printing status to text log.
+#   The default is NEVER (no logging to text log will be made)
+#csv_filename:
+#   If specified, measurements will be written to a csv file
+#   located at this path at the rate defined by "sample_time"
+#baseline_stale_time:
+#   If the previously stored baseline is older than
+#   baseline_stale_time, in seconds, consider the baseline stale
+#   and begin measurements for a new baseline.
+#   The default is 7*24*3600 (7 days)
+#baseline_initial_measurement_time:
+#   If no previous baseline is stored, or the previous baseline
+#   is stale, wait baseline_initial_measurement_time, in seconds,
+#   before storing the baseline as the new baseline
+#   The default is 12*3600 (12 hours)
+#baseline_measurement_time:
+#   After every baseline_measurement_time, in seconds, store
+#   the baseline for quick recovery after a power cycle
+#   The default is 3600 (1 hour)
+```
 ## Common bus parameters
 
 ### Common SPI settings

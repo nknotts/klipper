@@ -358,6 +358,13 @@ The following information is available in the `query_endstops` object
   the QUERY_ENDSTOP command must be run prior to the macro containing
   this reference.
 
+## sgp30
+
+The following information is available in
+[sgp30 some_name](Config_Reference.md#sgp30) objects:
+- `eco2`: The last read ECO2 (ppm) from the sensor.
+- `tvoc`: The last read TVOC (ppb) from the sensor.
+
 ## servo
 
 The following information is available in
